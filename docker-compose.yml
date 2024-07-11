@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres
+    container_name: example_postgres
+    hostname: example_postgres
+    environment:
+      POSTGRES_USER: "example_user"
+      POSTGRES_PASSWORD: "example_password"
+      POSTGRES_DB: "example_db"
+    restart: on-failure
+    networks:
+      - dagster_network
+    ports:
+      - 5438:5432
+    volumes:
+      - ./example_postgres_data:/var/lib/postgresql/data
+
+  dagster:
+    build: .
+    container_name: example_dagster
+    ports:
+      - 3008:3000
+    volumes:
+      - ./orchestration:/opt/dagster/dagster_home/orchestration 
+      - ./compute_logs:/opt/dagster/dagster_home/compute_logs
+      - ./local_artifact_storage:/opt/dagster/dagster_home/local_artifact_storage
+    restart: on-failure
+    networks:
+      - dagster_network
+    depends_on:
+      - postgres
+
+networks:
+  dagster_network:
+    driver: bridge
