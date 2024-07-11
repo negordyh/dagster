@@ -1,6 +1,5 @@
-*compute_logs*/
+compute_logs*/
 local_artifact_storage*/
-*example_postgres_data*/
-*postgres_data/
+example_postgres_data*/
 .env
 
