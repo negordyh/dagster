@@ -5,10 +5,12 @@ services:
     image: postgres
     container_name: example_postgres
     hostname: example_postgres
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: "example_user"
-      POSTGRES_PASSWORD: "example_password"
-      POSTGRES_DB: "example_db"
+      POSTGRES_USER: ${POSTGRES_DAGSTER_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     restart: on-failure
     networks:
       - dagster_network
@@ -26,6 +28,8 @@ services:
       - ./orchestration:/opt/dagster/dagster_home/orchestration 
       - ./compute_logs:/opt/dagster/dagster_home/compute_logs
       - ./local_artifact_storage:/opt/dagster/dagster_home/local_artifact_storage
+    env_file:
+      - .env
     restart: on-failure
     networks:
       - dagster_network
