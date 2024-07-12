@@ -3,3 +3,6 @@ local_artifact_storage*/
 example_postgres_data*/
 .env
 
+__pycache__/
+
+
