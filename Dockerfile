@@ -21,8 +21,8 @@ RUN pip install -r requirement.txt
 
 # Copy the project directories into the container
 COPY /orchestration $DAGSTER_HOME/orchestration
-# COPY /orchestration-dbt $DAGSTER_HOME/orchestration-dbt
-# COPY /dbt_project $DAGSTER_HOME/dbt_project
+COPY /orchestration-dbt $DAGSTER_HOME/orchestration-dbt
+COPY /dbt_project $DAGSTER_HOME/dbt_project
 
 # Expose port 3000 for web access
 EXPOSE 3000

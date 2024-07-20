@@ -1,0 +1,13 @@
+
+version: 2
+
+models:
+    #1
+    - name: base_orders
+      desciption: "Test base_orders table"
+      columns:
+        - name: order_id
+          description: "The primary key for this table"
+          tests:
+            - unique
+            - not_null

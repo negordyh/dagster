@@ -5,4 +5,8 @@ example_postgres_data*/
 
 __pycache__/
 
-
+dbt_packages/
+logs/
+target/
+profiles.yml
+.user.yml

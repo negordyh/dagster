@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+
+  - name: shopify_raw
+    description: ingestion from dagster
+    database: dev
+    schema: dbt_test_source
+    tables:
+      - name: base_shopify_order
+      - name: base_shopify__customer

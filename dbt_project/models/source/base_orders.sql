@@ -1,0 +1,1 @@
+select * from {{ source('shopify_raw', 'base_shopify_order') }} limit 10

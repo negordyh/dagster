@@ -1,0 +1,27 @@
+name: 'my_dbt_project'
+version: '1.0.0'
+config-version: 2
+profile: 'default'
+
+# Model configurations
+models:
+  my_dbt_project:
+    materialized: table
+    staging:
+      materialized: view
+
+# Path configurations
+model-paths: ["models"]        # where your SQL model files are stored
+analysis-paths: ["analysis"]   # where analytical SQL scripts are stored
+test-paths: ["tests"]          # where tests for models are stored
+seed-paths: ["data"]           # where CSV files for seeding are stored
+macro-paths: ["macros"]        # where Jinja macros are stored
+snapshot-paths: ["snapshots"]  # where snapshot files are configured
+
+# Compilation and Cleanup
+target-path: "target"          # directory which will store compiled SQL files and docs
+clean-targets:                 # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+# Additional settings can be included to optimize performance and customization
