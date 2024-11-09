@@ -1,18 +1,18 @@
-# __init__.py
 from dagster import Definitions, load_assets_from_modules
+from .assets import example_asset, rainforest_asset
+from .jobs import rainforest_job, example_assets_job
+from .schedules import rainforest_schedule, example_schedule
+from .resources.example_resource import example_resource
 
-from orchestration.assets import example_asset
-from orchestration.jobs.example_job import example_job
-from orchestration.schedules.example_schedule import example_schedule
-from orchestration.resources.example_resource import example_resource
+# Load all assets
+all_assets = load_assets_from_modules([example_asset, rainforest_asset])
 
-all_assets = load_assets_from_modules([example_asset])
-
+# Define the Dagster definitions
 defs = Definitions(
     assets=[*all_assets],
-    jobs=[example_job],
-    schedules=[example_schedule],
+    jobs=[rainforest_job, example_assets_job],
+    schedules=[rainforest_schedule, example_schedule],
     resources={
-        "example_resource": example_resource,
+        "example_resource": example_resource
     }
 )

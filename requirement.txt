@@ -6,6 +6,6 @@ dagster-snowflake
 dagster-postgres
 dbt-core
 dbt-snowflake
-
+pandas
 
 

@@ -1,4 +1,3 @@
--- +depends_on: {{ ref('mart_drop_backlog') }}
 {% snapshot orders_snaphot %}
 
     {{
