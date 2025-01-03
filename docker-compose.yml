@@ -2,15 +2,15 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres
+    image: postgres:16
     container_name: example_postgres
     hostname: example_postgres
     env_file:
       - .env
     environment:
-      POSTGRES_USER: ${POSTGRES_DAGSTER_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: example_user
+      POSTGRES_PASSWORD: example_password
+      POSTGRES_DB: example_db    
     restart: on-failure
     networks:
       - dagster_network
@@ -18,6 +18,11 @@ services:
       - 5438:5432
     volumes:
       - ./example_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   dagster:
     build: .
@@ -34,7 +39,8 @@ services:
     networks:
       - dagster_network
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
 networks:
   dagster_network:
